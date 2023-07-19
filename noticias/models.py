@@ -24,7 +24,7 @@ class Autor(models.Model):
     image = models.ImageField(upload_to="images / ", blank=False, default=None)
     pais = models.ForeignKey(Paises, on_delete=models.CASCADE, default=None)
     estado = models.BooleanField("Activo", default=True, blank=False, null=False)
-    correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S {2}\.\S {2}", message="Correo invalido")],)
+    correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}", message="Correo invalido")],)
     telefono = models.CharField("Telefono", max_length=20, blank=False, null=False,default=None) 
     fecha_creacion = models.DateField("Fecha de creacion", default=timezone.now, blank=False, null=False)
 
@@ -32,28 +32,28 @@ class Noticia(models.Model):
     titulo = models.CharField("Titulo de la noticia", max_length=200, blank=False, null=False)
     descripcion = models.TextField("Descripcion de la noticia", max_length=500, blank=False, null=False)
     fecha = models.DateTimeField("Fecha de creacion", default=timezone.now, blank=False, null=False)
-    autor = models.ForeignKey(Autor, to_field=" documento", on_delete=models.CASCADE,default=None)
+    autor = models.ForeignKey(Autor, to_field=" documento", on_delete=models.CASCADE, default=None)
     tipo = models.ForeignKey(TipoNoticia, on_delete=models.CASCADE, default=None )
 
 class Contacto(models.Model):
     id = models.AutoField(primary_key=True)
     nombreu = models.CharField("Nombres", max_length=200, blank=False, null=False)
-    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S {1}@\S {2}\.\S {2}",nessafe="Correo invalido")],)
+    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}", message="Correo invalido")],)
     mensaje = models.TextField("Mensaje", max_length=400, blank=False, null=False)
-    fecha_creacion = models.DateField("Fecha de Creacion",auto_now=True,blank=False, null=False)
+    fecha_creacion = models.DateField("Fecha de Creacion", auto_now=True, blank=False, null=False)
     teléfono = models.CharField("Telefono", max_length=20, blank = False, null = False, default = None)
     fecha_creación = models.DateField("Fecha de creacion", default=timezone.now, blank=False, null=False)
     
 class Noticia(models.Model):
-    titulo = models.CharField("Titulo de la notica", max_length=200,blank=False, null=False)
-    descripcion = models.TextField("Descripcion de la noticia", max_length=500, blank = False, null=False)
-    fecha = models.DateTimeField("fecha de creacion", default = timezone.now, blank=False, null=False)
-    autor = models.ForeignKey(Autor, to_field = " documento", on_delete = models.CACADE, default = None)
-    tipo = models.ForeignKey(TipoNoticia, on_delete = models.CACADE, default=None)
+    titulo = models.CharField("Titulo de la notica", max_length=200, blank=False, null=False)
+    descripcion = models.TextField("Descripcion de la noticia", max_length=500, blank=False, null=False)
+    fecha = models.DateTimeField("fecha de creacion", default=timezone.now, blank=False, null=False)
+    autor = models.ForeignKey(Autor, to_field=" documento", on_delete=models.CACADE, default=None)
+    tipo = models.ForeignKey(TipoNoticia, on_delete=models.CACADE, default=None)
 
 class Contacto(models.Model):
     id = models.AutoField(primary_key=True)
-    nombreu = models.CharField("Nombres", max_length=200,blank=False,null=False)
-    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null =False, default=None, validators = [RegexValidator(regex = r"\S {1}@\S{2}\.\S {2}",message="Correo invalido")])   
-    mensaje = models.TextField("Mensaje",max_length=400,blank=False, null=False)
+    nombreu = models.CharField("Nombres", max_length=200, blank=False, null=False)
+    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}",message="Correo invalido")])   
+    mensaje = models.TextField("Mensaje", max_length=400, blank=False, null=False)
     fecha_creación = models.DateTimeField("Fecha de creacion", auto_now=True, blank=False, name=False)
