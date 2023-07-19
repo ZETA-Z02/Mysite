@@ -32,7 +32,7 @@ class Noticia(models.Model):
     titulo = models.CharField("Titulo de la noticia", max_length=200, blank=False, null=False)
     descripcion = models.TextField("Descripcion de la noticia", max_length=500, blank=False, null=False)
     fecha = models.DateTimeField("Fecha de creacion", default=timezone.now, blank=False, null=False)
-    autor = models.ForeignKey(Autor, to_field=" documento", on_delete=models.CASCADE, default=None)
+    autor = models.ForeignKey(Autor, to_field="documento", on_delete=models.CASCADE, default=None)
     tipo = models.ForeignKey(TipoNoticia, on_delete=models.CASCADE, default=None )
 
 class Contacto(models.Model):
@@ -48,8 +48,8 @@ class Noticia(models.Model):
     titulo = models.CharField("Titulo de la notica", max_length=200, blank=False, null=False)
     descripcion = models.TextField("Descripcion de la noticia", max_length=500, blank=False, null=False)
     fecha = models.DateTimeField("fecha de creacion", default=timezone.now, blank=False, null=False)
-    autor = models.ForeignKey(Autor, to_field=" documento", on_delete=models.CACADE, default=None)
-    tipo = models.ForeignKey(TipoNoticia, on_delete=models.CACADE, default=None)
+    autor = models.ForeignKey(Autor, to_field="documento", on_delete=models.CASCADE, default=None)
+    tipo = models.ForeignKey(TipoNoticia, on_delete=models.CASCADE, default=None)
 
 class Contacto(models.Model):
     id = models.AutoField(primary_key=True)
