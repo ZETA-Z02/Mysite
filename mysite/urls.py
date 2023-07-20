@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+##Se utiliza las url con los views segun entiendo 19/07/23 11:28:55
+#from noticias.views import hello
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('', hello) <-- esto es para imprimir el primer hola mundo utilizando url y path como direccion del directorio
 ]

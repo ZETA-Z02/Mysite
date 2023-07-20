@@ -14,14 +14,23 @@ class Paises(models.Model):
     Nombre = models.CharField("Nombre del pais", max_length=50, blank=False, null=False)
 
 class TipoDoc(models.Model):
-    codigo = models.TextField("Descripcion del tipo de documento", max_length=20, blank=False, null=False)
+    descripcion = models.TextField("Descripcion del tipo de documento", max_length=20, blank=False, null=False)
     
 class Autor(models.Model):
     tipodoc = models.ForeignKey(TipoDoc, on_delete=models.CASCADE, default=None)
     documento = models.CharField("Documento de indentidad", max_length=16, blank=False, null=False, primary_key=True)
     nombres = models.CharField("Nombre del autor", max_length=200, blank=False, null=False, default=None)
     apellidos = models.CharField("Apellidos", max_length=200, blank=False, null=False, default=None)
-    image = models.ImageField(upload_to="images / ", blank=False, default=None)
+    
+    def get_foto(self):
+        if self.image:
+            return mark_safe(u'<img src="%s" width="60" height="75"/>' % self.image.url)
+        else:
+            return ''
+    get_foto.short_description = 'Photo'
+    get_foto.admin_order_field = 'name'
+    
+    image = models.ImageField(upload_to="images/ ", blank=False, default=None)
     pais = models.ForeignKey(Paises, on_delete=models.CASCADE, default=None)
     estado = models.BooleanField("Activo", default=True, blank=False, null=False)
     correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}", message="Correo invalido")],)
@@ -56,4 +65,4 @@ class Contacto(models.Model):
     nombreu = models.CharField("Nombres", max_length=200, blank=False, null=False)
     correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}",message="Correo invalido")])   
     mensaje = models.TextField("Mensaje", max_length=400, blank=False, null=False)
-    fecha_creación = models.DateTimeField("Fecha de creacion", auto_now=True, blank=False, name=False)
+    fecha_creación = models.DateTimeField("Fecha de creacion", auto_now=True, blank=False, null=False)
