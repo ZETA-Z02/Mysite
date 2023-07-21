@@ -1,6 +1,8 @@
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+
 
 ##ESTA CARPETA ESTA PARA CREAR LOS MODELOS
 # Create your models here.
@@ -30,10 +32,10 @@ class Autor(models.Model):
     get_foto.short_description = 'Photo'
     get_foto.admin_order_field = 'name'
     
-    image = models.ImageField(upload_to="images/ ", blank=False, default=None)
+    image = models.ImageField(upload_to='images/', blank=False, default=None)
     pais = models.ForeignKey(Paises, on_delete=models.CASCADE, default=None)
     estado = models.BooleanField("Activo", default=True, blank=False, null=False)
-    correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}", message="Correo invalido")],)
+    correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1,}@\S{2,}\.\S{2,}", message="Correo invalido")],)
     telefono = models.CharField("Telefono", max_length=20, blank=False, null=False,default=None) 
     fecha_creacion = models.DateField("Fecha de creacion", default=timezone.now, blank=False, null=False)
 
