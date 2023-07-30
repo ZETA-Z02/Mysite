@@ -1,7 +1,7 @@
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
-from django.utils.safestring import mark_safe
+from django.utils.safestring import mark_safe 
 
 
 ##ESTA CARPETA ESTA PARA CREAR LOS MODELOS
