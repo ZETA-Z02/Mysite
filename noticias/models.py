@@ -10,19 +10,19 @@ from django.utils.safestring import mark_safe
 class TipoNoticia(models.Model):
     tipo = models.CharField("Tipo de Noticias", max_length=30, blank=False, null=False)
     descripcion = models.TextField("Descripcion del tipo de noticias", max_length=300, blank=False, null=False)
-    
+
     class Meta:
         verbose_name = "Tipo de Noticias"
         verbose_name_plural = "Tipos de Noticias"
         ordering = ["tipo"]
-    
+
     def __str__(self):
         return '%s %s' % (self.tipo, self.descripcion)
-        
-class Paises(models.Model): 
+
+class Paises(models.Model):
     codigo = models.CharField(max_length=2, blank=False, null=False, primary_key=True)
     Nombre = models.CharField("Nombre del pais", max_length=50, blank=False, null=False)
-    
+
     class Meta:
         verbose_name = "Paises"
         verbose_name = "Paises"
@@ -32,11 +32,11 @@ class Paises(models.Model):
 
 class TipoDoc(models.Model):
     descripcion = models.TextField("Descripcion del tipo de documento", max_length=20, blank=False, null=False)
-    
+
     class Meta:
-        verbose_name = "Pais"
-        verbose_name_plural = "Paises"
-        ordering = ["descripcion"]  
+        verbose_name = "Tipo de Documento"
+        verbose_name_plural = "Tipo de Documentos"
+        ordering = ["descripcion"]
     def __str__(self):
         return '%s' % (self.descripcion)
 
@@ -52,14 +52,14 @@ class Autor(models.Model):
             return ''
     get_foto.short_description = 'Photo'
     get_foto.admin_order_field = 'name'
-    
+
     image = models.ImageField(upload_to='images/', blank=False, default=None)
     pais = models.ForeignKey(Paises, on_delete=models.CASCADE, default=None)
     estado = models.BooleanField("Activo", default=True, blank=False, null=False)
     correo = models.EmailField("Correo Electronico", max_length=254, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1,}@\S{2,}\.\S{2,}", message="Correo invalido")])
     telefono = models.CharField("Telefono", max_length=20, blank=False, null=False, default=None)
     fecha_creacion = models.DateField("Fecha de creacion", default=timezone.now, blank=False, null=False)
-    
+
     class Meta:
         verbose_name = "Autor"
         verbose_name_plural = "Autores"
@@ -80,19 +80,19 @@ class Noticia(models.Model):
         ordering = ['descripcion']
     def __str__(self):
         return '%s %s %s' % (self.titulo, self.descripcion, self.fecha)
- 
+
 class Contacto(models.Model):
     id = models.AutoField(primary_key=True)
     nombreu = models.CharField("Nombres", max_length=200, blank=False, null=False)
     correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1}@\S{2}\.\S{2}", message="Correo invalido")],)
     mensaje = models.TextField("Mensaje", max_length=400, blank=False, null=False)
-    fecha_creacion = models.DateField("Fecha de Creacion", auto_now=True, blank=False, null=False)
-    teléfono = models.CharField("Telefono", max_length=20, blank = False, null = False, default = None)
-    fecha_creación = models.DateField("Fecha de creacion", default=timezone.now, blank=False, null=False)
-    
+    fecha_creacion = models.DateField("Fecha de Creacion", default=timezone.now, blank=False, null=False)
+    telefono = models.CharField("Telefono", max_length=20, blank = False, null = False, default = None)
+    fecha_modificacion = models.DateField("Fecha de modificacion", auto_now=True, blank=False, null=False)
+
     class Meta:
         verbose_name = "Contacto"
         verbose_name_plural = "Contactos"
         ordering = ['id']
     def __str__(self):
-        return '%s %s %s %s' % (self.id, self.nombre, self.correo, self.mensaje)
+        return '%s %s %s %s' % (self.id, self.nombreu, self.correo, self.mensaje)

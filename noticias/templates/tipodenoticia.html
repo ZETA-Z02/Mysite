@@ -1,0 +1,13 @@
+{%extends 'layouts/base.html' %}
+{%block title%}tipo de noticias{%endblock%}
+{%block content%}
+<h1>tipo de noticias que hay en la base de datos</h1>
+
+<p>{{responder}}</p>
+
+<ul>
+    {%for mostrar in responder%}
+    <li>{{ mostrar.tipo }} : {{ mostrar.descripcion}}</li>
+    {% endfor %}
+</ul>
+{%endblock%}
