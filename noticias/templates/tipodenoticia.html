@@ -3,11 +3,9 @@
 {%block content%}
 <h1>tipo de noticias que hay en la base de datos</h1>
 
-<p>{{responder}}</p>
-
 <ul>
-    {%for mostrar in responder%}
-    <li>{{ mostrar.tipo }} : {{ mostrar.descripcion}}</li>
+    {%for tipoNoticia in tipoDeNoticias%}
+    <li><a href="{%url 'noticias:noticias'%}#{{tipoNoticia.tipo}}">{{ tipoNoticia.tipo }}</a> : {{ tipoNoticia.descripcion}}</li>
     {% endfor %}
 </ul>
 {%endblock%}

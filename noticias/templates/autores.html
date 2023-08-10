@@ -1,19 +1,16 @@
 {%extends 'layouts/base.html'%}
-
-
-
+{%block title%}autores{%endblock%}
 {% block content %}
 
 {%include 'layouts/sidebar.html'%}
 
-<body>
-    <h1>pagina para mostrar los autores</h1>
+<h1>pagina para mostrar los autores</h1>
     <ul>
-    {% for autor in autores %}
-        <li>nombre del autor: {{ autor.nombres }}</li>
-    {%endfor%}
+        {% for autor in autores %}
+            <li>nombre del autor: {{ autor.nombres }}</li>
+        {%endfor%}
     </ul>
-    <h2>autores sin dni</h2>
+<h2>Autores sin dni</h2>
     {% for autor in autores %}
         {% if autor.tipodoc_id == 2 %}
             <h3>nombre del autor: {{ autor.nombres }}</h3>
@@ -22,11 +19,34 @@
         {% endif %}
     {%endfor%}
 <h3>los paises de los cuales son algunos de nuestros autores</h3>
-<ol>
-{% for pais in paises %}
-<li>el codigo del pais: {{ pais.Nombre }} {{ pais.codigo}}</li>
-{% endfor %}
-</ol>
-</body>
+    <ol>
+        {% for pais in paises %}
+            <li>el codigo del pais: {{ pais.Nombre }} {{ pais.codigo}}</li>
+        {% endfor %}
+    </ol>
+
+<table>
+    <thead>
+        <tr>
+            <th>id-num</th>
+            <th>autor</th>
+            <th>origen del autor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for autorTable in autores%}
+            <tr>
+                <td>{{autorTable.documento}}</td>
+                <td>{{autorTable.nombres}}</td>
+                {%for paisesAutor in paises%}
+                    {% if paisesAutor.codigo == autorTable.pais_id %}
+                        <td>{{autorTable.pais_id}}</td>
+                    {% endif %}
+                {%endfor%}    
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
 {%include 'layouts/footer.html'%}
 {% endblock %}

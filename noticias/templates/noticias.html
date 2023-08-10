@@ -4,4 +4,18 @@
 
 {%block content%}
 <h1>noticias</h1>
+{%for tipo in tipoNoticias%}
+    <div id="{{tipo.tipo}}" style="margin-bottom: 600px;">
+        <h1>EL TIPO DE NOTICIA ES: {{tipo.tipo}}</h1>
+        <h2>{{tipo.descripcion}}</p></h2>
+        {%for noticia in noticias%}
+            {% if tipo.id == noticia.tipo_id %}
+                <div class="noticia">
+                    <h2>la noticia es:{{noticia.titulo}}</h2>
+                    <p>{{noticia.descripcion}}</p>
+                </div>
+            {% endif %}
+        {%endfor%}
+    </div>
+{%endfor%}
 {%endblock%}

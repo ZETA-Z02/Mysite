@@ -2,6 +2,8 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe 
+from django.utils.html import format_html
+
 
 
 ##ESTA CARPETA ESTA PARA CREAR LOS MODELOS
@@ -47,9 +49,10 @@ class Autor(models.Model):
     apellidos = models.CharField("Apellidos", max_length=200, blank=False, null=False, default=None)
     def get_foto(self):
         if self.image:
-            return mark_safe(u'<img src="%s" width="60" height="75"/>' % self.image.url)
+            return format_html('<img src="{}" width="60" height="75"/>', self.image.url)
         else:
             return ''
+        
     get_foto.short_description = 'Photo'
     get_foto.admin_order_field = 'name'
 

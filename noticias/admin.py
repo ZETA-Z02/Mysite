@@ -16,7 +16,7 @@ class TipoDocAdmin(admin.ModelAdmin):
     list_filter = ('id', 'descripcion')
 
 class AutorAdmin(admin.ModelAdmin):
-    list_display = ('tipodoc','documento','nombres','apellidos','image')
+    list_display = ('tipodoc','documento','nombres','apellidos','image','get_foto')
     list_filter = ('documento', 'nombres', 'apellidos')
 
 class NoticiaAdmin(admin.ModelAdmin):

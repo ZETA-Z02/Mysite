@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import TipoNoticia, Autor, Paises
+from .models import *
 
 #Primer hola mundo con django, estara comentado para seguir con el libro
 #muestran y envian solo mensajes, sin html sin mas
@@ -24,11 +24,11 @@ def index(request):
         'title': title,
     })
 
-def noticia(request):
-    responder = TipoNoticia.objects.all()
+def noticiaTipoHtml(request):
+    tipoDeNoticias = TipoNoticia.objects.all()
     return render(request, "tipodenoticia.html",
     {
-       'responder': responder,
+       'tipoDeNoticias': tipoDeNoticias,
     })
 
 def autores(request):
@@ -42,16 +42,45 @@ def autores(request):
 
 def paises(request):
     paises = Paises.objects.all()
-    return render(request, "paises.html",
+    return render(request, "paises.html","autor.html",
     {
         'paises' : paises,
     })
-    
+
 def contactos(request):
     return render(request, "contactos.html")
 
 def datosAutores(request):
-    return render(request, "datosAutores.html")
+    autores = Autor.objects.all()
+    paises = Paises.objects.all()
+    documentos = TipoDoc.objects.all()
+    for autor in autores:
+        if autor.estado==1:
+            autor.estadoActual='Activo'
+        else:
+            autor.estadoActual='Inactivo'
+    for pais in paises:
+        for autor in autores:
+            if pais.codigo==autor.pais_id:
+                autor.paisActual=pais.Nombre
+    for documento in documentos:
+        for autor in autores:
+            if documento.id == autor.tipodoc_id:
+                autor.documentoActual = documento.descripcion                
+    return render(request, "datosAutores.html",
+    {
+        'autores':autores,
+        'paises':paises,
+        'documentos':documentos,
+    }
+    )
 
 def noticias(request):
-    return render(request, "noticias.html")
+    tipoNoticias = TipoNoticia.objects.all()
+    noticias = Noticia.objects.all()
+    return render(request, "noticias.html",
+    {
+       'tipoNoticias': tipoNoticias,
+       'noticias': noticias,
+    })
+    

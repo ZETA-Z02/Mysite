@@ -2,5 +2,41 @@
 {% block title %}Datos{% endblock %}
 
 {%block content%}
-<h1>datos de los autores</h1>
+
+<h1>Datos de los autores</h1>
+<h2>Conozca mas de los autores</h2>
+<table>
+    <thead>
+        <tr>
+            <th>documento</th>
+            <th>nombres</th>
+            <th>apellidos</th>
+            <th>estado</th>
+            <th>correo</th>
+            <th>telefono</th>
+            <th>fecha de creacion</th>
+            <th>pais</th>
+            <th>tipo de documento</th>
+            <th>imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for autor in autores%}
+       <tr>
+            <td>{{autor.documento}}</td>
+            <td>{{autor.nombres}}</td>
+            <td>{{autor.apellidos}}</td>
+            <td>{{autor.estadoActual}}</td>
+            <td>{{autor.correo}}</td>
+            <td>{{autor.telefono}}</td>
+            <td>{{autor.fecha_creacion}}</td>
+            <td>{{autor.paisActual}}</td>
+            <td>{{autor.documentoActual}}</td>
+            <td><img src="{{autor.image.url}}" width="60" height="75"/></td>
+       </tr>
+       {%endfor%}
+    </tbody>
+</table>
+<a href=""><button>registrar a un nuevo autor</button></a>
+
 {%endblock%}

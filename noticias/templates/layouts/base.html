@@ -10,16 +10,18 @@
         <ul>
             <li><a href="{% url 'noticias:index' %}">principal-index</a></li>
             <li><a href="{% url 'noticias:autores' %}">autores</a></li>
-            <li><a href="{% url 'noticias:noticia' %}">tipo de noticia</a></li>
+            <li><a href="{% url 'noticias:noticiaTipoHtml' %}">tipo de noticia</a></li>
             <li><a href="{% url 'noticias:datosAutores'%}">datos autores</a></li>
             <li><a href="{% url 'noticias:noticias'%}">noticia</a></li>
             <li><a href="{% url 'noticias:contactos'%}">contactos</a></li>
         </ul>
     </div>
-    <div class="contenido">
-        {% block content%}
-        {%endblock%}
-    </div>
+    <main>
+        <div class="contenido">
+            {% block content%}
+            {%endblock%}
+        </div>
+    </main>
 </body>
 </html>
 

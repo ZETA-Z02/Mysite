@@ -2,7 +2,17 @@
 {% block title%}Noticias index{%endblock%}
 
 {%block content%}
-<h1>Welcome to the jungle</h1>
+
+<h1>Welcome to DJANGO Page</h1>
 <h2>{{ title }}</h2>
 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur amet quis unde maiores, dolorum suscipit ipsum eum, aut quam dicta nam explicabo repudiandae. Rerum molestias atque laudantium consectetur eos itaque!</p>
+
+<ol>
+    <li><a href="{% url 'noticias:autores' %}">Mira a los autores</a></li>
+    <li><a href="{% url 'noticias:noticias' %}">Noticias principales</a></li>
+    <li><a href="{% url 'noticias:datosAutores' %}">Datos de los autores</a></li>
+    <li><a href="{% url 'noticias:noticiaTipoHtml' %}">Tipos de noticias en la Pagina Django</a></li>
+    <li><a href="{% url 'noticias:contactos' %}">Deja sugerencias-Contactenos</a></li>
+</ol>
+
 {%endblock%}
