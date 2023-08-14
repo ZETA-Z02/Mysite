@@ -12,7 +12,7 @@
     </ul>
 <h2>Autores sin dni</h2>
     {% for autor in autores %}
-        {% if autor.tipodoc_id == 2 %}
+        {% if autor.tipodoc_id == 1 %}
             <h3>nombre del autor: {{ autor.nombres }}</h3>
         {%else%}    
             <h4>este autor no se muestra, por que usa DNI: {{autor.apellidos}}</h4>
@@ -47,6 +47,14 @@
         {%endfor%}
     </tbody>
 </table>
+
+<div class="formulario">
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{autorForm.as_p}}
+        <button type="submit">registrar nuevo autor</button>
+    </form>
+</div>
 
 {%include 'layouts/footer.html'%}
 {% endblock %}

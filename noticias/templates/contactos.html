@@ -3,8 +3,34 @@
 
 {%block content%}
 <h1>contactos</h1>
-
-
-
 <h3>aqui deje sus sugerencias</h3>
+
+<form method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+<button  type="submit">registrar sugerencias</button>
+</form>
+<br><br><br>
+<a href="{% url 'noticias:form_contactos' %}"><button>enviar</button></a>
+
+<h4>ver comentarios y contactos</h4>
+<table>
+    <thead>
+        <th>nombres</th>
+        <th>mensaje</th>
+        <th>telefono</th>
+        <th>correo</th>
+    </thead>
+    <tbody>
+        {%for contacto in contactos%}
+            <tr>
+                <td>{{contacto.nombreu}}</td>
+                <td>{{contacto.mensaje}}</td>
+                <td>{{contacto.telefono}}</td>
+                <td>{{contacto.correo}}</td>
+            </tr>
+        {%endfor%}
+        
+    </tbody>
+</table>
 {%endblock%}

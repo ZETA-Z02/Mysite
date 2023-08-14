@@ -8,4 +8,11 @@
     <li><a href="{%url 'noticias:noticias'%}#{{tipoNoticia.tipo}}">{{ tipoNoticia.tipo }}</a> : {{ tipoNoticia.descripcion}}</li>
     {% endfor %}
 </ul>
+<div>
+    <form action="" method="post">
+        {%csrf_token%}
+        {{formTipo.as_p}}
+        <button type="submit">registrar nuevo tipo de noticia</button>
+    </form>
+</div>
 {%endblock%}

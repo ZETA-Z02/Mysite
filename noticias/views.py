@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from .models import *
-
+from .forms import *
 #Primer hola mundo con django, estara comentado para seguir con el libro
 #muestran y envian solo mensajes, sin html sin mas
 def hello(request):
@@ -19,25 +19,45 @@ def tipoNoticia(request):
 #definir funciones para mostrar por pantalla, aqui se hace las consultas para mandar a mostrar en el html
 def index(request):
     title = 'DJANGO!!!! utilizando variables'
+    #name = input("ingresa tu nombre")
     return render(request, "index.html",
     {
         'title': title,
+        #'name': name,
     })
 
 def noticiaTipoHtml(request):
-    tipoDeNoticias = TipoNoticia.objects.all()
+    if request.method == 'POST':
+        form = TipoNoticiaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias:noticiaTipoHtml')
+    else:
+        form = TipoNoticiaForm()
+        
+    TipoDeNoticias = TipoNoticia.objects.all()
     return render(request, "tipodenoticia.html",
     {
-       'tipoDeNoticias': tipoDeNoticias,
+       'tipoDeNoticias': TipoDeNoticias,
+       'formTipo':form,
     })
 
 def autores(request):
+    if request.method == 'POST':
+        form = AutorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias:datosAutores')
+    else:
+        form = AutorForm()
+
     autores = Autor.objects.all()
     paises = Paises.objects.all()
     return render(request, "autores.html",
     {
         'autores': autores,
         'paises':paises,
+        'autorForm':form,
     })
 
 def paises(request):
@@ -48,12 +68,33 @@ def paises(request):
     })
 
 def contactos(request):
-    return render(request, "contactos.html")
+    contactos = Contacto.objects.all()
+    return render(request, "contactos.html",
+    {
+        'contactos':contactos,
+    })
+
+def formContactos(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias:contactos')
+    else:
+        form = ContactoForm()
+    
+    return render(request, "contactos.html",
+    {
+        'form':form,   
+    })
+            
 
 def datosAutores(request):
     autores = Autor.objects.all()
+    var= TipoDoc.objects.get(id=2)
     paises = Paises.objects.all()
     documentos = TipoDoc.objects.all()
+    
     for autor in autores:
         if autor.estado==1:
             autor.estadoActual='Activo'
@@ -72,15 +113,24 @@ def datosAutores(request):
         'autores':autores,
         'paises':paises,
         'documentos':documentos,
+        'dato':var
     }
     )
 
 def noticias(request):
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias:noticias')
+    else:
+        form = NoticiaForm()
     tipoNoticias = TipoNoticia.objects.all()
     noticias = Noticia.objects.all()
     return render(request, "noticias.html",
     {
        'tipoNoticias': tipoNoticias,
        'noticias': noticias,
+       'noticiaForm': form,
     })
     
