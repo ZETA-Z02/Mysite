@@ -88,7 +88,7 @@ class Noticia(models.Model):
 class Contacto(models.Model):
     id = models.AutoField(primary_key=True)
     nombreu = models.CharField("Nombres", max_length=200, blank=False, null=False)
-    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{4}@\S{5}\.\S{3}", message="Correo invalido")],)
+    correo = models.CharField("Correo Electronico", max_length=200, blank=False, null=False, default=None, validators=[RegexValidator(regex=r"\S{1,}@\S{2,}\.\S{2,}", message="Correo invalido")],)
     mensaje = models.TextField("Mensaje", max_length=400, blank=False, null=False)
     fecha_creacion = models.DateField("Fecha de Creacion", default=timezone.now, blank=False, null=False)
     telefono = models.CharField("Telefono", max_length=20, blank = False, null = False, default = None)

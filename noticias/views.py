@@ -133,4 +133,3 @@ def noticias(request):
        'noticias': noticias,
        'noticiaForm': form,
     })
-    
