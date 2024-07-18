@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NOTICIAS{% endblock %}</title>
+
 </head>
 <body>
+    <h1>algo</h1>
     <div>
         <ul>
             <li><a href="{% url 'noticias:index' %}">principal-index</a></li>
@@ -23,5 +25,10 @@
         </div>
     </main>
 </body>
+<style>
+    h1{
+        color: red;
+    }
+</style>
 </html>
 

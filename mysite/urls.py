@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', hello) <-- esto es para imprimir el primer hola mundo utilizando url y path como direccion del directorio
     path('',include(('noticias.urls','noticias'))),
-    
 ]
+
